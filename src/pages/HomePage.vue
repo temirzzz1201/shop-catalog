@@ -2,13 +2,9 @@
   <main class="container">
     <div class="home-page">
       <h2>Категории товаров</h2>
-      <div v-if="categories.length">
-        <div class="home-page__cards">
-          <category-item v-for="category in categories" :key="category.slug" :category="category" />
-        </div>
-      </div>
-      <div v-else>
-        <p>Загрузка категорий...</p>
+      <AppSpiner v-if="!categories.length" size="large" speed="normal" color="green" />
+      <div v-else class="home-page__cards">
+        <category-item v-for="category in categories" :key="category.slug" :category="category" />
       </div>
     </div>
   </main>
@@ -18,16 +14,23 @@
 import { useCategoryStore } from '../stores/index';
 import { mapActions, mapState } from 'pinia';
 import CategoryItem from '../components/CategoryItem.vue';
+import AppSpiner from '../UI/AppSpiner.vue';
 
 export default {
   components: {
     CategoryItem,
+    AppSpiner
   },
   props: {
     city: {
       type: Object,
       required: true
     }
+  },
+  data() {
+    return {
+      loading: true,
+    };
   },
   computed: {
     ...mapState(useCategoryStore, ['categories']),

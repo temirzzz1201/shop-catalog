@@ -16,7 +16,7 @@
           @subcategory-selected="selectSubcategory"
         />
         <main>
-          <div v-if="loading">Загрузка...</div>
+          <AppSpiner v-if="loading" size="medium" speed="fast" color="blue" />
           <div v-else-if="filteredProducts.length" class="category-page__cards">
             <product-item 
               v-for="product in filteredProducts" 
@@ -39,11 +39,13 @@ import { mapActions, mapState } from 'pinia';
 import backBtn from '../assets/images/back_btn.svg';
 import ProductItem from '../components/ProductItem.vue';
 import Sidebar from '../components/Sidebar.vue';
+import AppSpiner from '../UI/AppSpiner.vue';
 
 export default {
   components: {
     ProductItem,
-    Sidebar
+    Sidebar,
+    AppSpiner
   },
   props: {
     city: {
@@ -58,7 +60,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useCategoryStore, ['selectedCategory', 'products', 'selectedSubcategory', 'categoriesChildren', 'categoryName']),
+    ...mapState(useCategoryStore, ['products', 'selectedSubcategory', 'categoriesChildren', 'categoryName']),
     
     filteredProducts() {
       if (this.selectedSubcategory) {

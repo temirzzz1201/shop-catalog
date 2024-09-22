@@ -2,7 +2,7 @@
   <div class="category__card">
     <router-link :to="{ name: 'Category', params: { categorySlug: category.slug } }">
       <p class="category__card__title category__card__title_indent" :style="{ color: category.text_color }">{{ category.name }}</p>
-      <img class="category__card__img" :src="category.image" :alt="category.name" />
+      <img loading="lazy" class="category__card__img" :src="category.image" :alt="category.name" />
     </router-link>
   </div>
 </template>

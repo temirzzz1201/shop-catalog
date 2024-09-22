@@ -8,7 +8,7 @@ export const useCategoryStore = defineStore('categoryStore', {
     products: [],
     selectedSubcategory: null,
     categoriesChildren: [],
-    categoryName: null
+    categoryName: null,
   }),
   actions: {
     async fetchCategories(cityId) {
